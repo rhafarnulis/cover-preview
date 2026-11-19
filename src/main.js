@@ -7,7 +7,7 @@
 import { buildEditor } from './editor.js';
 import { handleShot } from './shots.js';
 
-const editorApi = buildEditor(document.querySelector('#app'), () => {
+buildEditor(document.querySelector('#app'), (editorApi) => {
   handleShot(editorApi).catch((error) => {
     const status = document.querySelector('#status');
     if (status) status.textContent = String(error.message || error);
