@@ -7,9 +7,16 @@
 import { buildEditor } from './editor.js';
 import { handleShot } from './shots.js';
 
+// Temporary diagnostics: surface any load-time error in the status line.
+window.addEventListener('error', (event) => {
+  const status = document.querySelector('#status');
+  if (status) status.textContent = 'ERR: ' + event.message;
+  document.title = 'ERR: ' + event.message;
+});
+
 buildEditor(document.querySelector('#app'), (editorApi) => {
   handleShot(editorApi).catch((error) => {
     const status = document.querySelector('#status');
-    if (status) status.textContent = String(error.message || error);
+    if (status) status.textContent = 'SHOT-ERR: ' + String(error.message || error);
   });
 });
