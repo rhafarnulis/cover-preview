@@ -51,6 +51,13 @@ export async function handleShot(editorApi) {
   }
   const grade = params.get('grade');
   if (grade && GRADES[grade]) state.grade = grade;
+  // Keep the option buttons in sync with the state set from the URL.
+  document.querySelectorAll('[data-layout]').forEach((button) => {
+    button.classList.toggle('active', button.dataset.layout === state.layout);
+  });
+  document.querySelectorAll('[data-grade]').forEach((button) => {
+    button.classList.toggle('active', button.dataset.grade === state.grade);
+  });
 
   const photoName = params.get('photo');
   if (photoName) {
@@ -81,6 +88,12 @@ export async function handleShot(editorApi) {
     canvas.width = size.w;
     canvas.height = size.h;
     canvas.hidden = false;
+    // Fit the whole cover inside the viewport (explicit size, so the
+    // caption band is never cut off below the fold in a screenshot).
+    const fit = Math.min(window.innerWidth / size.w, window.innerHeight / size.h);
+    canvas.style.width = `${Math.floor(size.w * fit)}px`;
+    canvas.style.height = `${Math.floor(size.h * fit)}px`;
+    canvas.style.margin = '0 auto';
     if (document.fonts && document.fonts.load) {
       try {
         await document.fonts.load('100px Anton');
