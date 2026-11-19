@@ -88,9 +88,14 @@ export async function handleShot(editorApi) {
     canvas.width = size.w;
     canvas.height = size.h;
     canvas.hidden = false;
-    // Fit the whole cover inside the viewport (explicit size, so the
-    // caption band is never cut off below the fold in a screenshot).
-    const fit = Math.min(window.innerWidth / size.w, window.innerHeight / size.h);
+    // Fit the whole cover inside the viewport — and cap the display size
+    // so the caption band is visible even when a screenshot service only
+    // captures the top part of the page.
+    const fit = Math.min(
+      window.innerWidth / size.w,
+      window.innerHeight / size.h,
+      640 / Math.max(size.w, size.h),
+    );
     canvas.style.width = `${Math.floor(size.w * fit)}px`;
     canvas.style.height = `${Math.floor(size.h * fit)}px`;
     canvas.style.margin = '0 auto';
