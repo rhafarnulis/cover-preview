@@ -219,7 +219,7 @@ function renderList() {
   emptyBox.hidden = shown.length > 0;
   if (openId) {
     const target = document.getElementById('trophy-' + openId);
-    if (target) target.scrollIntoView({ block: 'center' });
+    if (target) target.scrollIntoView({ block: 'start' });
   }
 }
 
