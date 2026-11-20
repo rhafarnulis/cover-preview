@@ -66,6 +66,9 @@ button:hover, .import-btn:hover { filter: brightness(1.12); }
 .import-btn input { display: none; }
 .toolbar-note { margin: 10px 0 0; font-size: 13px; color: var(--muted); min-height: 1.2em; }
 .roadmap { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 20px; }
+.roadmap-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.roadmap-head button { background: transparent; border-color: var(--cyan); color: var(--cyan); padding: 5px 10px; font-size: 13px; }
+.roadmap.collapsed .roadmap-body { display: none; }
 .roadmap h2 { margin: 0 0 6px; font-size: 22px; color: var(--gold); }
 .roadmap-intro { margin: 0 0 14px; color: var(--muted); }
 .stages { margin: 0; padding-left: 22px; display: grid; gap: 14px; }
