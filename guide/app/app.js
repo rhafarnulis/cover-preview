@@ -42,6 +42,14 @@ function applyUrlParams() {
   if (params.get('missable') === 'only') missableOnlyBox.checked = true;
   const open = Number(params.get('open'));
   if (open) openId = open;
+  if (params.get('roadmap') === 'closed') setRoadmapCollapsed(true);
+}
+
+function setRoadmapCollapsed(collapsed) {
+  const section = document.getElementById('roadmap');
+  const btn = document.getElementById('roadmap-toggle');
+  section.classList.toggle('collapsed', collapsed);
+  btn.textContent = collapsed ? 'Show roadmap' : 'Hide roadmap';
 }
 
 function setKindFilter(kind) {
@@ -271,6 +279,12 @@ trophies = doc.trophies;
 applyUrlParams();
 renderRoadmapCounts();
 rerender();
+document.getElementById('roadmap-toggle').addEventListener('click', () => {
+  setRoadmapCollapsed(!document.getElementById('roadmap').classList.contains('collapsed'));
+});
 if (params.get('view') === 'roadmap') {
   document.getElementById('roadmap').scrollIntoView();
+}
+if (params.get('view') === 'list') {
+  document.getElementById('grid').scrollIntoView();
 }
